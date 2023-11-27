@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Joe Berlucchi's Resume Website</title>
+    <link rel="icon" type="image/x-icon" href="../media/images/surfing-icon.ico">
+    <link rel="stylesheet" href="../css/default.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+            border: 1px solid #2c2c2c;
+        }
+        main > ol li,  ol li:before{
+            background-color: var(--block-color, #333333);
+            background: var(--block-color, #333333);
+            padding-bottom: 1em;
+            padding-left: 0.5em;
+        }
+
+        summary {
+            padding: 1rem;
+            display: block;
+            padding-left: 1rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        summary:before {
+            content: '';
+            border-width: .4rem;
+            border-style: solid;
+            border-color: transparent transparent transparent #fff;
+            position: absolute;
+            top: 1.3rem;
+            left:0;
+            transform: rotate(0);
+            transform-origin: .2rem 50%;
+            transition: .25s transform ease;
+            }
+
+
+        details[open] > summary:before {
+            transform: rotate(90deg);
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <section>
+            <img src="../media/images/surfing-icon.svg" style="width: 50px; height: 50px;" alt = "Surf logo Icon">
+            <h2>Joe Berlucchi's Portfolio Site</h2>
+        </section>
+        <nav>
+            <ul>
+                <li>
+                   <a href="../index.html">Home</a>
+                </li>
+                <li>
+                    <a href="resume.html">Resume</a>
+                </li>
+                <li>
+                    <a href="work_experience.html">Work Experience</a>
+                </li>
+                <li>
+                    <a href="projects.html">Projects</a>
+                </li>
+                <li>
+                    <a href="contactme.html">Contact Me</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Work Experience</h1>
+        <table>
+            <caption>Work Experience Summary</caption>
+            <colgroup>
+                <col span="4">
+            </colgroup>
+            <tr>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Dates Worked</th>
+                <th>Time worked</th>
+            </tr>
+            <tr>
+                <td>Northrop Grumman</td>
+                <td>San Diego, CA</td>
+                <td>June 2023 - Setember 2023</td>
+                <td>4 Months</td>
+            </tr>
+
+            <tr>
+                <td>Northrop Grumman</td>
+                <td>San Diego, CA</td>
+                <td>June 2022 - June 2023</td>
+                <td>1 year</td>
+            </tr>
+
+            <tr>
+                <td>Auburn Community Hospital</td>
+                <td>Auburn, NY</td>
+                <td>June 2017 - August 2017</td>
+                <td>3 Months</td>
+            </tr>
+
+        </table>
+        <ol>
+            <li>
+                <section>
+                    <h2>Northrop Grumman</h2>
+
+                    <p> Dates: June 2023 - September 2023<br class="only-break">
+                        Website: <a href="https://www.northropgrumman.com/">https://www.northropgrumman.com/</a><br class="only-break">
+                        Security Clearence: Secret <br class="only-break">
+                        Job Title: Software Engineer Intern<br class="only-break">
+                    </p>
+                        <details open>
+                            <summary>Description</summary>
+                            <p>● Maintained code remote Java codebase that simulates and produces data that is used on the network.
+                                <br class="only-break">
+                                ● Created a data generator in Python, using Jupyter notebooks, to transpose data that will be used to stress
+                                test and randomize data for input of a data network.
+                                <br class="only-break">
+                                ● Implemented unit testing and data visualization in order to ensure the output of the data is high quality
+                                and expected.
+                                <br class="only-break">
+                                ● Optimized the data generator in order to be faster and produce higher quality data.
+                                <br class="only-break"></p>
+                        </details>
+                </section>
+            </li>
+            <li>
+                <section>
+                    <h2>Northrop Grumman</h2>
+                    <p> Dates: June 2022 - June 2023<br class="only-break">
+                        Job Title: Software Engineer Intern<br class="only-break">
+                        Website: <a href="https://www.northropgrumman.com/">https://www.northropgrumman.com/</a><br class="only-break">
+                        Security Clearence: Secret <br class="only-break">
+                        Awards: Bravo to our Stars <br class="only-break">
+                    </p>
+                        <details open>
+                            <summary>Description</summary>
+                            <p>● Created a singular web-app combining two similar internal web-apps. Combining their databases in
+                                order to be used as one application.<br class="only-break">
+                                ● Implemented React and Typescript for the web-app and implemented Django and Python for the
+                                back-end.<br class="only-break">
+                                ● Improved the design of web pages to provide better user experience and quality of life improvements.<br class="only-break">
+                                ● Optimized the RESTful backend which provided faster loading times for data.<br class="only-break">
+                                ● Internship extended during fall 2022.<br class="only-break">
+                                ● Received award for excellent performance.<br class="only-break">
+                                ● Intern Extended until May 2023
+                                <br class="only-break"></p>
+                            
+                        </details>
+                </section>
+            </li>
+            <li>
+                <section>
+                    <h2>Auburn Community Hospital</h2>
+                    <p> Dates: June 2017 - August 2017<br class="only-break">
+                        Job Title: I.T. Intern<br class="only-break">
+                        Website: <a href="https://www.auburnhospital.org/">https://www.auburnhospital.org/</a><br class="only-break">
+                    </p>
+                        <details open>
+                            <summary>Description</summary>
+                            <p>Worked in Auburn community hospital as a summer internship. My responsiblities included:<br class="only-break">
+                                ● Trouble shooting of hospital equipment.<br class="only-break">
+                                ● Deployment of software using PDQ Deploy.<br class="only-break">
+                                ● Maintainment of I.T equipment.<br class="only-break">
+                            </p>
+                            
+                        </details>
+                </section>
+            </li>
+        </ol>
+
+    </main>
+
+</body>
+</html>

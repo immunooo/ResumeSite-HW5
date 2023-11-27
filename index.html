@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Joe Berlucchi's Portfolio Website</title>
+    <!-- I got this icon from https://uxwing.com/surfing-icon/ -->
+    <link rel="icon" type="image/x-icon" href="media/images/surfing-icon.ico">
+    <link rel="stylesheet" href="css/default.css">
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'> 
+    <style>
+        /*aside {float:right;}*/
+        aside {
+            margin: 0;
+        }
+        main > div {
+            display: flex;
+            flex-wrap: wrap;
+            content: "";
+            align-items: center;
+            clear:both;
+            justify-content: space-between;
+        }
+        main > div > aside {
+            float:left;
+            flex: 50dvw;
+            background-color: var(--block-color, #333333);
+            padding-left: 1vw;
+            padding-right: 1vw;
+        }
+
+        main > div > div {
+            flex: 50dvw;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media only screen and (min-width: 768px) {
+            main > div {
+                gap: 5dvw;
+            }
+            main > div > div {
+                flex: 35dvw;
+                text-align: right;
+            }
+            main > div > aside {
+                flex: 45dvw;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            main div br:not(#only-break) {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <script>//Placeholder</script>
+    <header class="navbar">
+        <section>
+            <!-- I got this icon from https://uxwing.com/surfing-icon/ -->
+            <img src="media/images/surfing-icon.svg" style="width: 50px; height: 50px;" alt = "Surf logo Icon">
+            <h2>Joe Berlucchi's Portfolio Site</h2>
+        </section>
+        <nav>
+            <ul>
+                <li>
+                   <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="pages/resume.html">Resume</a>
+                </li>
+                <li>
+                    <a href="pages/work_experience.html">Work Experience</a>
+                </li>
+                <li>
+                    <a href="pages/projects.html">Projects</a>
+                </li>
+                <li>
+                    <a href="pages/contactme.html">Contact Me</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1 style="text-align: center;">Welcome to Joe Berlucchi's Portfolio!</h1>
+        <div>
+            <div>
+                <picture id="me">
+                    <img src="media/images/me.jpg" style="width: 300px; height: 400px;" alt="A picture of me!">
+                </picture>
+            </div>
+            <aside>
+                <section>
+                    <h2>About me:</h2>
+                    <p> I am an up and comming software engineer. I currently attend <strong>University of California, San diego</strong> as a computer science major.<br>
+                        I currently have a job offer from <b>Northrop Grumman</b> which I hope to start working. <i>I am still open to work at other companies!</i><br>
+                        I like to surf and play video games in my free time. I love to hang out with friends too!<br>
+                        <br class="only-break"><br class="only-break">
+                        The purpose of this website is to show off what I have dont in terms of projects and work experince that I would not be able<br>
+                        to fit on one page of my resume. Feel free to browse around!
+
+                    </p>
+
+                </section>
+                <hr>
+                <section>
+                    <h2>Social medias:</h2> 
+                    <p>
+                        <img src="media/images/Instagram_logo_2016.svg" width="30" height="30" alt = "Instagram Logo"><a href="https://www.instagram.com/joeberlucchi/">@joeberlucchi</a>
+                        <img src="media/images/linked_in_logo.svg" width="130" height="30" alt="Link to my Linked In page."><a href="https://www.linkedin.com/in/jberlucchi/">@jberlucchi</a>
+                    </p>
+            
+                </section>
+            </aside>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+
+</body>
+</html>
