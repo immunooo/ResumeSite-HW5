@@ -10,6 +10,62 @@
         option, button{
             color: black;
         }
+        fieldset {
+            text-align: left;
+            display: flex;
+            flex-direction:column;
+            width: 20vw;
+        }
+        input, select{
+            width: 200px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+        }
+        main, main > form fieldset {
+            margin: auto;
+            text-align: center;
+            align-items: center;
+        }
+
+        input:user-invalid, textarea:user-invalid{
+            border: 2px solid red;
+        }
+
+        input:valid, textarea:valid{
+            border: 2px solid green;
+        }
+
+        @keyframes flash {
+            0%, 50%, 100% {
+                border-color: red;
+            }
+            25%, 75% {
+                border-color: transparent;
+            }
+        }
+
+        .input-err {
+            animation: flash 1s infinite;
+        }
+
+        .err-msg {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .err-msg.fade {
+             opacity: 0;
+        }
+
+        input:focus, textarea:focus  {
+            outline: none;
+            box-shadow: none;
+        }
+
+
     </style>
 </head>
 <body>
@@ -46,33 +102,99 @@
 
         
         <p> You can email me at joeberlucchi2019@gmail.com or fill out:</p>
-        <form action="https://httpbin.org">
+        <form id="contactform" action="https://httpbin.org/anything" method="post">
             <fieldset>
                 <legend>Contact Me</legend>
-                <label for="name">Name: </label>
-                <input id="name"><br class="only-break"><br class="only-break">
-                <label for="email">Email: </label>
-                <input id="email" type="email"><br class="only-break"><br class="only-break">
-                <label for="phone">Phone: </label>
-                <input id="phone" type="text"><br class="only-break"><br class="only-break">
-                <label for="best-contact">Best way to Contact:</label>
-                <select id="best-contact">
-                    <optgroup label="Best Way to Contact">
-                        <option>Email</option>
-                        <option>Phone Number</option>
-                        <option>None</option>
-                    </optgroup>
-                </select>
-                <br class="only-break"><br class="only-break">
-                <label for="qcc">Questions, comments, concerns:<br class="only-break"> </label>
-                <textarea id="qcc"> optional </textarea><br class="only-break"><br class="only-break">
-                <input type="submit" value="Submit">
+                <label for="name">Name</label>
+                <input name="name" type="text" id="name" pattern="[a-zA-Z ]+" maxlength="100" required>
+                <div><output id="errorName"></output><output id="infoName" class="err-msg"></output></div><br class="only-break">
+                <label for="email" >Email: </label>
+                <input name="email" id="email" type="email" maxlength="100" required>
+                <input name="possible_bot" hidden>
+                <div><outpu id="errorEmail"></output><outputid="infoEmail"></output></div><br class="only-break">
+                <label for="qcc">Comments<br class="only-break"> </label>
+                <textarea name="comments" id="qcc" maxlength="300"  required></textarea>
+                <div><output id="errorComment"></output><output id="InfoComment">Chars Remaining: 300</output></div><br class="only-break">
+                <input id="formsubmit" type="submit" value="Submit">
+
             </fieldset>
 
         </form>
 
     </main>
 
+    <script type="text/javascript">
+
+        function saveError(elmt) {
+            if(!elmt.reportValidity()) {
+                return {field: elmt.name, message: elmt.validationMessage, data: elmt.value}
+            }
+            return null
+        }
+
+        document.getElementById('formsubmit').addEventListener('click', function (event) {
+            let form_errors = []
+           
+            form_errors.push(saveError(document.getElementById('name')))
+            form_errors.push(saveError(document.getElementById('email')))
+            form_errors.push(saveError(document.getElementById('qcc')))
+            form_errors = form_errors.filter(Boolean)
+            form_errors = JSON.stringify(form_errors)
+            formData = new FormData();
+            formData.append('form_errors', form_errors)
+            fetch("https://httpbin.org/anything", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Form submitted successfully');
+                } else {
+                    console.error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+            });
+
+        });
+
+
+        document.getElementById('name').addEventListener('input', function (event) {
+            let valid_chars = /[^a-zA-Z ]/g;
+            if (valid_chars.test(this.value)) {
+                document.getElementById("infoName").style.display = 'block';
+                document.getElementById("infoName").classList.remove('fade');
+                //this.value = this.value.replace(valid_chars, '');
+                this.classList.add('input-err')
+                document.getElementById("infoName").textContent = "Invalid characters!"
+                setTimeout(function () {
+                    document.getElementById('name').classList.remove('input-err');
+                    document.getElementById("infoName").classList.add('fade');
+                }, 2000)
+                this.setCustomValidity("Illegal character!");
+            } else {
+                document.getElementById("infoName").style.display = 'none';
+                this.setCustomValidity("");
+            }
+        });
+        //Feature to count characters in text area
+        document.getElementById("qcc").addEventListener('input', function () {
+            let remaining = 300 - this.value.length;
+            document.getElementById("InfoComment").textContent = "Chars Remaining: " + remaining;
+            let valid_chars = /[^a-zA-Z0-0@#$%^&*()-_=+!.,"';: ]/g;
+            if(valid_chars.test(this.value)) {
+                this.setCustomValidity("Illegal character!");
+            } else {
+                this.setCustomValidity("");
+            }
+            if(remaining < 50) {
+                document.getElementById("InfoComment").style.color = remaining < 10 ? 'red' : 'orange';
+            } else {
+                document.getElementById("InfoComment").style.color = 'white'
+            }
+        });
+    </script>
 
 </body>
 </html>

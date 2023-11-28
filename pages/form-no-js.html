@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Joe Berlucchi's Resume Website</title>
+    <link rel="icon" type="image/x-icon" href="../media/images/surfing-icon.ico">
+    <link rel="stylesheet" href="../css/default.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        option, button{
+            color: black;
+        }
+        fieldset {
+            text-align: left;
+            display: flex;
+            flex-direction:column;
+            width: 20vw;
+        }
+        input, select{
+            width: 200px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+        }
+        main, main > form fieldset {
+            margin: auto;
+            text-align: center;
+            align-items: center;
+        }
+
+        input:user-invalid, textarea:user-invalid{
+            border: 2px solid red;
+        }
+
+        input:valid, textarea:valid{
+            border: 2px solid green;
+        }
+        input:user-invalid + div output:first-child:before {
+            content:"Error: Invalid Characters  ";
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <section>
+            <picture>
+                <img src="../media/images/surfing-icon.svg" style="width: 50px; height: 50px;" alt = "Surf logo Icon">
+            </picture>
+            <h2>Joe Berlucchi's Portfolio Site</h2>
+        </section>
+        <nav>
+            <ul>
+                <li>
+                   <a href="../index.html">Home</a>
+                </li>
+                <li>
+                    <a href="resume.html">Resume</a>
+                </li>
+                <li>
+                    <a href="work_experience.html">Work Experience</a>
+                </li>
+                <li>
+                    <a href="projects.html">Projects</a>
+                </li>
+                <li>
+                    <a href="contactme.html">Contact Me</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Contact Me</h1>
+        <p> Thank you for visiting!</p>
+
+        
+        <p> You can email me at joeberlucchi2019@gmail.com or fill out:</p>
+        <form action="https://httpbin.org/anything" method="post">
+            <fieldset>
+                <legend>Contact Me</legend>
+                <label for="name">Name</label>
+                <input name="name" type="text" id="name" pattern="[a-zA-Z ]+" maxlength="100" required>
+                <div><output></output><output>Max: 100 chars</output></div><br class="only-break">
+                <label for="email" >Email: </label>
+                <input name="email" id="email" type="email" maxlength="100" required>
+                <input name="possible_bot" hidden>
+                <div><output></output><output>Max: 100 chars</output></div><br class="only-break">
+                <label for="qcc">Comments<br class="only-break"> </label>
+                <textarea name="comments" id="qcc" maxlength="300"  required></textarea>
+                <div><output></output><output>Max: 300 chars</output></div><br class="only-break">
+                <input type="submit" value="Submit">
+
+            </fieldset>
+
+        </form>
+
+    </main>
+
+
+</body>
+</html>
