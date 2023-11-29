@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="../media/images/surfing-icon.ico">
     <link rel="stylesheet" href="../css/default.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../javascript/light_dark_pages.js"></script>
     <style>
         option, button{
             color: black;
@@ -123,7 +124,8 @@
 
     </main>
 
-    <script type="text/javascript" src="../javascript/light_dark_pages.js">
+    <script type="text/javascript" >
+        inital();
 
         function saveError(elmt) {
             if(!elmt.reportValidity()) {
@@ -191,7 +193,7 @@
             if(remaining < 50) {
                 document.getElementById("InfoComment").style.color = remaining < 10 ? 'red' : 'orange';
             } else {
-                document.getElementById("InfoComment").style.color = 'white'
+                document.getElementById("InfoComment").style.color = 'var(--text-c, #121212)'
             }
         });
     </script>

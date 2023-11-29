@@ -1,3 +1,4 @@
+function inital() {
 let navlinks = document.getElementById("nav-links");
 let button = document.createElement('input');
 const sun = "../media/images/sun-icon.svg";
@@ -51,3 +52,4 @@ button.addEventListener('click', function (event) {
         //document.documentElement.style.color = "#121212";
     }
 })
+}
