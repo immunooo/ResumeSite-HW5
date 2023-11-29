@@ -23,7 +23,7 @@
         main > div > aside {
             float:left;
             flex: 50dvw;
-            background-color: var(--block-color, #333333);
+            background-color: var(--header-c, #333333);
             padding-left: 1vw;
             padding-right: 1vw;
         }
@@ -64,7 +64,7 @@
             <h2>Joe Berlucchi's Portfolio Site</h2>
         </section>
         <nav>
-            <ul>
+            <ul id="nav-links">
                 <li>
                    <a href="index.html">Home</a>
                 </li>
@@ -80,6 +80,9 @@
                 <li>
                     <a href="pages/contactme.html">Contact Me</a>
                 </li>
+                <!--<li>
+                    <input type="image" src="./media/images/moon-icon.svg" alt="light mode swtich"   width="17" height="17"/>
+                </li>-->
             </ul>
         </nav>
     </header>
@@ -116,9 +119,7 @@
             </aside>
         </div>
     </main>
-    <footer>
-
-    </footer>
+    <script src="./javascript/light_dark.js"></script>
 
 </body>
 </html>

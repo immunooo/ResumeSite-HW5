@@ -16,7 +16,7 @@
             flex-direction:column;
             width: 20vw;
         }
-        input, select{
+        fieldset > input, select{
             width: 200px;
         }
 
@@ -30,11 +30,11 @@
             align-items: center;
         }
 
-        input:user-invalid, textarea:user-invalid{
+        fieldset > input:user-invalid, textarea:user-invalid{
             border: 2px solid red;
         }
 
-        input:valid, textarea:valid{
+        fieldset > input:valid, textarea:valid{
             border: 2px solid green;
         }
 
@@ -60,7 +60,7 @@
              opacity: 0;
         }
 
-        input:focus, textarea:focus  {
+        fieldset > input:focus, textarea:focus  {
             outline: none;
             box-shadow: none;
         }
@@ -77,7 +77,7 @@
             <h2>Joe Berlucchi's Portfolio Site</h2>
         </section>
         <nav>
-            <ul>
+            <ul id="nav-links">
                 <li>
                    <a href="../index.html">Home</a>
                 </li>
@@ -123,7 +123,7 @@
 
     </main>
 
-    <script type="text/javascript">
+    <script type="text/javascript" src="../javascript/light_dark_pages.js">
 
         function saveError(elmt) {
             if(!elmt.reportValidity()) {

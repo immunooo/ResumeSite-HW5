@@ -16,7 +16,7 @@
             flex-direction:column;
             width: 20vw;
         }
-        input, select{
+        fieldset > input, select{
             width: 200px;
         }
 
@@ -30,14 +30,14 @@
             align-items: center;
         }
 
-        input:user-invalid, textarea:user-invalid{
+        fieldset > input:user-invalid, textarea:user-invalid{
             border: 2px solid red;
         }
 
-        input:valid, textarea:valid{
+        fieldset > input:valid, textarea:valid{
             border: 2px solid green;
         }
-        input:user-invalid + div output:first-child:before {
+        fieldset > input:user-invalid + div output:first-child:before {
             content:"Error: Invalid Characters  ";
         }
 
@@ -52,7 +52,7 @@
             <h2>Joe Berlucchi's Portfolio Site</h2>
         </section>
         <nav>
-            <ul>
+            <ul id="nav-links">
                 <li>
                    <a href="../index.html">Home</a>
                 </li>
