@@ -6,6 +6,7 @@
     <!-- I got this icon from https://uxwing.com/surfing-icon/ -->
     <link rel="icon" type="image/x-icon" href="media/images/surfing-icon.ico">
     <link rel="stylesheet" href="css/default.css">
+    <script src="./javascript/light_dark.js"></script>
     <meta content='width=device-width, initial-scale=1.0' name='viewport'> 
     <style>
         /*aside {float:right;}*/
@@ -26,6 +27,7 @@
             background-color: var(--header-c, #333333);
             padding-left: 1vw;
             padding-right: 1vw;
+            padding-bottom: 1vw;
         }
 
         main > div > div {
@@ -116,10 +118,72 @@
                     </p>
             
                 </section>
+                <hr>
+                <h3>Weather</h3>
+                <weather-widget>
+                    <p>Current Weather Conditions Unavailable</p>
+                </weather-widget>
             </aside>
         </div>
     </main>
-    <script src="./javascript/light_dark.js"></script>
+    <script type="text/javascript">
+        inital();
+        class WeatherWidget extends HTMLElement {
+            action = "https://api.weather.gov/points/32.8801,-117.234" //UCSD LOCATION
+
+            constructor(){
+                super();
+                this.attachShadow({mode:"open"});
+                this.display()
+
+            }
+
+            display() {
+                this.getWeather().then(weather => {
+                    if(weather == undefined) return;
+                    const template = document.createElement('template');
+                    let current_image = null;
+                    if(weather.isDayTime) {
+                        current_image = "./media/images/sun-icon.svg";
+                    } else {
+                        current_image = "./media/images/moon-icon.svg";
+                    }
+
+                    let insertedHTML = `
+                        <style>
+                        </style>
+                        <span> <img src=${current_image} style="width: 15px; height: 15px;" alt = "Surf logo Icon"> ${weather.shortForecast} ${weather.temperature}&deg;${weather.temperatureUnit}</span>
+                    `;
+                    template.innerHTML = insertedHTML;
+                    this.shadowRoot.appendChild(template.content.cloneNode(true));
+                });
+            }
+
+            getWeather() {
+                return new Promise((resolve, reject) => {
+                    fetch(this.action)
+                    .then(response =>{
+                        if (!response.ok) {
+                            resolve(undefined);
+                        }
+                        return response.json();
+                    }).then(data => {
+                        if(data.properties.forecast) {
+                            return fetch(data.properties.forecast)
+                        } else {
+                            resolve(undefined);
+                        }
+                    }).then(response => response.json())
+                    .then(data => {
+                        resolve(data.properties.periods[0]);
+                    })
+                })
+            }
+
+        }
+
+        customElements.define('weather-widget', WeatherWidget);
+    </script>
 
 </body>
 </html>
