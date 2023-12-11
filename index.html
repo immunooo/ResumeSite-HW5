@@ -152,7 +152,7 @@
                     let insertedHTML = `
                         <style>
                         </style>
-                        <span> <img src=${current_image} style="width: 15px; height: 15px;" alt = "Surf logo Icon"> ${weather.shortForecast} ${weather.temperature}&deg;${weather.temperatureUnit}</span>
+                        <span> <img src=${current_image} style="width: 15px; height: 15px;" alt = "Weather icon"> ${weather.shortForecast} ${weather.temperature}&deg;${weather.temperatureUnit}</span>
                     `;
                     template.innerHTML = insertedHTML;
                     this.shadowRoot.appendChild(template.content.cloneNode(true));
