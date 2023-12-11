@@ -103,3 +103,6 @@ header > nav > ul > li > a {
 form > fieldset > input, select, textarea {
     color:var(--dark-mode-color);
 }
+form > input, select, textarea {
+    color:var(--dark-mode-color);
+}

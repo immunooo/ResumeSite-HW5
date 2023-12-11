@@ -121,11 +121,150 @@
             </fieldset>
 
         </form>
+        <h3>Rate my website:</h3>
+        <rating-widget>
+            <form action="https://httpbin.org/post" id="rating-form" method="POST">
+                <label for="rating">How satisfied are you?</label>
+                <input type="hidden" name="question" value="How Satisfied are you?">
+                <input type="hidden" name="sentBy" id="sentBy" value="HTML">
+                <input type="number" id="rating" name="rating" min="1" max ="5" value="0" required>
+                <button type="submit">Submit</button>
+            </form>
+        </rating-widget>
 
     </main>
 
     <script type="text/javascript" >
         inital();
+
+        //#############################################################################
+        // HOMEWORK 5 JS BEGIN
+        class RatingWidget extends HTMLElement {
+            rating = null;
+            max = null;
+            min = null;
+
+            constructor(){
+                super();
+                this.attachShadow({mode:"open"});
+                this.rating = document.getElementById('rating');
+                this.max = this.rating.max
+                if(this.max > 10) {
+                    this.max = 10;
+                }
+                this.min = this.rating.min
+                if(this.min < 1) {
+                    this.min = 1;
+                }
+                this.display()
+
+            }
+
+            connectedCallback() {
+                this.initEventListeners();
+            }
+
+            display() {
+                const template = document.createElement('template');
+                let insertedHTML = `
+                    <style>
+                        div {
+                            display:inline-block;
+                        }
+
+                        .star {
+                            cursor: pointer;
+                            color: color:var(--text-c, aliceblue);
+                        }
+
+                        .star:hover, .star[active=true]{
+                            color: gold;
+                        }
+
+                        
+                    </style>
+
+                    <div class="stars">
+                `;
+                for (let i = this.min; i <= this.max; i++) {
+                    insertedHTML += `\n<span class="star" rating="` + i + `"> &#9733;</span>`;
+                }
+                insertedHTML += `\n</div>\n<p class="star-msg"></p>`;
+                template.innerHTML = insertedHTML;
+                this.shadowRoot.appendChild(template.content.cloneNode(true));
+            }
+
+            initEventListeners() {
+                const stars = this.shadowRoot.querySelectorAll('.star');
+                stars.forEach(star => {
+                    star.addEventListener('click', () => {
+                        let msg = null;
+                        let rat= star.getAttribute('rating');
+                        if (rat < this.max * 0.8) {
+                            msg = `<span>Thanks for your feedback of ` + rat + ` stars. We'll try to do better!</span>`;
+
+                        } else {
+                            msg = `<span>Thanks for the ` + rat + ` star rating!</span>`;
+                        }
+                        this.shadowRoot.querySelector('.stars').innerHTML = msg;
+                        this.sendRating()
+                    })
+
+                    star.addEventListener('mouseover', () => {
+                        let rat= star.getAttribute('rating');
+                        document.getElementById("rating").setAttribute("value", rat)
+                        this.toggleStars(star.getAttribute('rating'));
+                    })
+                    
+                    star.addEventListener('mouseout', () => {
+                        this.toggleStars(0);
+                    })
+                })
+            }
+
+            sendRating() {
+                document.getElementById("sentBy").setAttribute("value", "JS")
+                const rating_form = document.getElementById("rating-form");
+
+                
+                fetch(rating_form.action, {
+                    method: 'POST',
+                    body: new FormData(rating_form),
+                    headers: {
+                        'X-Sent-By':'JS'
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log(console.log("Response: ", response.json()));
+                    } else {
+                        console.error('Form Failed!');
+                    }  
+                })
+                .catch(error => {
+                    console.error('ERROR:', error);
+                });
+            }
+
+            toggleStars(targetStar) {
+                const stars = this.shadowRoot.querySelectorAll('.star');
+                stars.forEach(star => {
+                    let rat = star.getAttribute('rating');
+                    if(rat <= targetStar) {
+                        star.setAttribute('active', true);
+                    } else {
+                        star.setAttribute('active', false);
+                    }
+                });
+            }
+
+        }
+
+        customElements.define('rating-widget', RatingWidget);
+
+
+        // HOMEWORK 5 JS END
+        //#############################################################################
 
         function saveError(elmt) {
             if(!elmt.reportValidity()) {
@@ -150,13 +289,13 @@
             })
             .then(response => {
                 if (response.ok) {
-                    console.log('Form submitted successfully');
+                    console.log('Success!');
                 } else {
-                    console.error('Form submission failed');
+                    console.error('Faulure!');
                 }
             })
             .catch(error => {
-                console.error('Error submitting form:', error);
+                console.error('Error!', error);
             });
 
         });
