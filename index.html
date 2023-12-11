@@ -140,8 +140,13 @@
 
             display() {
                 this.getWeather().then(weather => {
-                    if(weather == undefined) return;
                     const template = document.createElement('template');
+                    if(weather == undefined) {
+                        template.innerHTML = `<p>Current Weather Conditions Unavailable</p>`;
+                        this.shadowRoot.appendChild(template.content.cloneNode(true));
+                        return;
+
+                    } 
                     let current_image = null;
                     if(weather.isDayTime) {
                         current_image = "./media/images/sun-icon.svg";
